@@ -193,12 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'bo1':
                     return {
                         sequence: [
-                            { type: 'ban', team: 1 },  // Team A bans
+                            { type: 'ban', team: 1 },  // Team A bans first
                             { type: 'ban', team: 2 },  // Team B bans
                             { type: 'ban', team: 1 },  // Team A bans
                             { type: 'ban', team: 2 },  // Team B bans
-                            { type: 'ban', team: 1 },  // Team A bans
                             { type: 'ban', team: 2 },  // Team B bans
+                            { type: 'ban', team: 1 },  // Team A bans
                             { type: 'remaining', team: null }  // Last map is played
                         ]
                     };
