@@ -2,9 +2,6 @@
   <img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=28&duration=300&pause=100000&color=C62368&center=true&vCenter=true&random=false&width=435&lines=EZVeto+%E2%9C%A8;Professional+CS2+Map+Veto+System" alt="Typing SVG" />
 </h1>
 
-<p align="center">
-  <img src="peak.svg" alt="EZVeto Banner" width="800">
-</p>
 
 <div align="center">
 
@@ -64,20 +61,36 @@ EZVeto is a professional CS2 map veto system designed to streamline the competit
 
 <h2 align="center">Getting Started 🎮</h2>
 
-1. Visit [EZVeto](https://your-deployment-url.com)
+1. Visit [EZVeto](https://shiiiivanshsingh.github.io/EZVeto/)
 2. Select your match format (BO1/BO3/BO5)
 3. Use the coin flip for team assignment
 4. Follow the veto process
 5. Select starting sides
 6. Get your match summary
 
+<h2 align="center">Related Projects 🎮</h2>
+
+<div align="center">
+
+### [CS2 Map Callout Guide](https://callouts-gg.netlify.app/)
+
+An interactive guide for Counter-Strike 2 map callouts featuring:
+- 📍 11 Detailed Maps
+- 🔄 Resizable Map Views
+- 🌓 Dark/Light Theme Support
+- 📱 Responsive Design
+
+[![Visit Callouts.gg](https://img.shields.io/badge/Visit-Callouts.gg-C62368?style=for-the-badge)](https://callouts-gg.netlify.app/)
+
+</div>
+
 <h2 align="center">Connect With Me 🤝</h2>
 
 <div align="center">
 
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/yourusername)
-[![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/yourusername)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ShiiiivanshSingh)
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/de_mirage_fan)
+[![Repository](https://img.shields.io/badge/Repository-C62368?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ShiiiivanshSingh/EZVeto)
 
 </div>
 
@@ -85,9 +98,9 @@ EZVeto is a professional CS2 map veto system designed to streamline the competit
 
 <div align="center">
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/ezveto?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/ezveto?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/yourusername/ezveto?style=social)
+![GitHub stars](https://img.shields.io/github/stars/ShiiiivanshSingh/EZVeto?style=social)
+![GitHub forks](https://img.shields.io/github/forks/ShiiiivanshSingh/EZVeto?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/ShiiiivanshSingh/EZVeto?style=social)
 
 </div>
 

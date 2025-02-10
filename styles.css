@@ -431,17 +431,17 @@ nav, .hero-content {
 .footer {
     background-color: transparent;
     position: relative;
-    margin-top: 300px;
+    margin-top: 100px;
     padding: 4rem 2rem 2rem;
 }
 
 .footer::before {
     content: '';
     position: absolute;
-    top: -300px;
+    top: -100px;
     left: 0;
     width: 100%;
-    height: calc(100% + 300px);
+    height: calc(100% + 100px);
     background-image: url('layer.svg');
     background-position: bottom;
     background-repeat: no-repeat;
@@ -1230,4 +1230,152 @@ nav, .hero-content {
     .cta-section h2 {
         font-size: 2rem;
     }
+}
+
+/* Add these styles for the related projects section */
+.related-projects {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('peak.svg') no-repeat center center/cover;
+}
+
+.related-projects h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    position: relative;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px 0 rgba(198, 35, 104, 0.2);
+}
+
+.project-card i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.project-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.project-features {
+    list-style: none;
+    margin: 2rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.project-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.project-features i {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Add styles for the contribute section */
+.contribute-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('peak.svg') no-repeat center center/cover;
+}
+
+.contribute-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    position: relative;
+}
+
+.contribute-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.contribute-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px 0 rgba(198, 35, 104, 0.2);
+}
+
+.contribute-card i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.contribute-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.contribute-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.contribute-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature i {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.feature span {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Update repository link icon */
+.footer-section ul li a i.fa-code-branch {
+    margin-right: 0.5rem;
+}
+
+.footer-section ul li a i.fa-code-branch::before {
+    content: '\f09b'; /* GitHub icon */
+    font-family: "Font Awesome 5 Brands";
 } 
