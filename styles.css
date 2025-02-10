@@ -171,18 +171,20 @@ nav, .hero-content {
 
 /* Coin Flip Animation */
 .coin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     perspective: 1000px;
     margin: 4rem auto;
     width: 200px;
-    height: 200px;
 }
 
 .coin {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 200px;
     transform-style: preserve-3d;
-    transition: transform 1.5s ease;
+    transition: transform 1.5s ease-in-out;
 }
 
 .coin .side-a,
@@ -198,10 +200,16 @@ nav, .hero-content {
     font-size: 1.5rem;
     font-weight: bold;
     background: linear-gradient(45deg, var(--accent-color), #fa7268);
+    box-shadow: 0 0 20px rgba(198, 35, 104, 0.3);
 }
 
 .coin .side-b {
     transform: rotateY(180deg);
+}
+
+@keyframes spin {
+    0% { transform: rotateY(0); }
+    100% { transform: rotateY(1800deg); }
 }
 
 /* Maps Grid */
@@ -530,9 +538,10 @@ nav, .hero-content {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: 2rem;
+    margin: 2rem auto;
     position: relative;
     overflow: hidden;
+    display: block;
 }
 
 .flip-button::before {
@@ -568,15 +577,16 @@ nav, .hero-content {
 
 /* Map Items */
 .maps-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
-    max-width: 600px;
+    max-width: 800px;
     margin: 2rem auto;
+    padding: 0 1rem;
 }
 
 .map-item {
-    padding: 1.2rem;
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     cursor: pointer;
@@ -588,6 +598,10 @@ nav, .hero-content {
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
 }
 
 .map-item::before {
@@ -607,8 +621,9 @@ nav, .hero-content {
 }
 
 .map-item:hover {
-    background: rgba(198, 35, 104, 0.2);
     transform: translateY(-2px);
+    background: rgba(198, 35, 104, 0.2);
+    border-color: rgba(198, 35, 104, 0.3);
 }
 
 .map-item:hover::before {
@@ -619,7 +634,7 @@ nav, .hero-content {
     opacity: 0.5;
     text-decoration: line-through;
     cursor: not-allowed;
-    transform: scale(0.98);
+    transform: scale(0.95);
     background: rgba(255, 0, 0, 0.1);
 }
 
@@ -627,24 +642,23 @@ nav, .hero-content {
     background: rgba(198, 35, 104, 0.3);
     transform: scale(1.02);
     border-color: rgba(198, 35, 104, 0.5);
+    font-weight: 600;
 }
 
 /* Ban Lists */
 .veto-status {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 3rem;
-    gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 0 1rem;
 }
 
 .team-bans {
-    flex: 1;
-    max-width: 300px;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex: unset;
+    max-width: none;
+    width: 100%;
 }
 
 .team-bans h3 {
@@ -677,8 +691,8 @@ nav, .hero-content {
 /* Turn Indicator */
 .turn-indicator {
     text-align: center;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 600;
     color: var(--accent-color);
     margin: 1rem 0;
     padding: 1rem;
@@ -687,17 +701,21 @@ nav, .hero-content {
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: pulse 2s infinite;
+    transition: all 0.3s ease;
 }
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(198, 35, 104, 0.4);
+        transform: scale(1);
+        color: var(--accent-color);
     }
-    70% {
-        box-shadow: 0 0 0 10px rgba(198, 35, 104, 0);
+    50% {
+        transform: scale(1.05);
+        color: #fa7268;
     }
     100% {
-        box-shadow: 0 0 0 0 rgba(198, 35, 104, 0);
+        transform: scale(1);
+        color: var(--accent-color);
     }
 }
 
@@ -732,4 +750,176 @@ nav, .hero-content {
     border-radius: 8px;
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Add responsive breakpoints */
+@media (max-width: 768px) {
+    .maps-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .maps-list {
+        grid-template-columns: repeat(1, 1fr);
+        max-width: 300px;
+    }
+}
+
+/* Add a subtle animation for state changes */
+.map-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add these styles for the summary cards */
+.maps-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.format-display {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.format-display h3 {
+    font-size: 1.8rem;
+    background: linear-gradient(45deg, var(--accent-color), #fa7268);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    font-weight: 700;
+}
+
+.map-summary-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.map-summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+.map-number {
+    background: linear-gradient(45deg, var(--accent-color), #fa7268);
+    color: var(--text-color);
+    padding: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.map-details {
+    padding: 1.2rem;
+}
+
+.map-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.map-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.map-info span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.map-info i {
+    color: var(--accent-color);
+}
+
+@media (max-width: 480px) {
+    .map-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+}
+
+/* Add animation for cards */
+.map-summary-card {
+    animation: slideIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.map-summary-card:nth-child(1) { animation-delay: 0.1s; }
+.map-summary-card:nth-child(2) { animation-delay: 0.2s; }
+.map-summary-card:nth-child(3) { animation-delay: 0.3s; }
+.map-summary-card:nth-child(4) { animation-delay: 0.4s; }
+.map-summary-card:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add styles for the toss result */
+.toss-result {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-height: 1.8rem;
+    color: var(--accent-color);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.toss-result.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Update media queries for better mobile display */
+@media (max-width: 768px) {
+    .maps-summary,
+    .format-display {
+        max-width: 90%;
+    }
 } 

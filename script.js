@@ -152,6 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
         flipCoin() {
             const coin = document.querySelector('.coin');
             const flipButton = document.querySelector('.flip-button');
+            const tossResult = document.querySelector('.toss-result');
+            
+            // Reset and hide result text
+            tossResult.textContent = '';
+            tossResult.classList.remove('show');
             
             // Disable button during animation
             flipButton.disabled = true;
@@ -161,16 +166,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const extraRotation = Math.random() < 0.5 ? 0 : 180;
             const totalRotation = rotations + extraRotation;
             
+            // Add animation class
             coin.style.transform = `rotateY(${totalRotation}deg)`;
             
             // Determine winner based on final rotation
             this.currentTeam = extraRotation === 0 ? 'Team A' : 'Team B';
             
-            // Wait for animation to complete
+            // Wait for coin flip animation to complete
             setTimeout(() => {
-                flipButton.disabled = false;
-                this.switchPhase('ban-phase');
-                this.updateTurnIndicator();
+                // Show winner message
+                tossResult.textContent = `${this.currentTeam} wins the toss!`;
+                tossResult.classList.add('show');
+                
+                // Wait additional 3 seconds before moving to ban phase
+                setTimeout(() => {
+                    flipButton.disabled = false;
+                    this.switchPhase('ban-phase');
+                    this.updateTurnIndicator();
+                }, 3000);
             }, 1500);
         }
 
@@ -190,25 +203,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'bo3':
                     return {
                         sequence: [
-                            { type: 'ban', team: 1 },
-                            { type: 'ban', team: 2 },
-                            { type: 'pick', team: 1 },
-                            { type: 'pick', team: 2 },
-                            { type: 'ban', team: 1 },
-                            { type: 'ban', team: 2 },
-                            { type: 'decider', team: null }
+                            { type: 'ban', team: 1 },  // Team A bans
+                            { type: 'ban', team: 2 },  // Team B bans
+                            { type: 'pick', team: 1 }, // Team A picks map 1
+                            { type: 'pick', team: 2 }, // Team B picks map 2
+                            { type: 'ban', team: 1 },  // Team A bans
+                            { type: 'ban', team: 2 },  // Team B bans
+                            { type: 'remaining', team: null } // Last map becomes map 3
                         ]
                     };
                 case 'bo5':
                     return {
                         sequence: [
-                            { type: 'ban', team: 1 },
-                            { type: 'ban', team: 2 },
-                            { type: 'pick', team: 1 },
-                            { type: 'pick', team: 2 },
-                            { type: 'pick', team: 1 },
-                            { type: 'pick', team: 2 },
-                            { type: 'decider', team: null }
+                            { type: 'ban', team: 1 },  // Team A bans
+                            { type: 'ban', team: 2 },  // Team B bans
+                            { type: 'pick', team: 1 }, // Team A picks map 1
+                            { type: 'pick', team: 2 }, // Team B picks map 2
+                            { type: 'pick', team: 1 }, // Team A picks map 3
+                            { type: 'pick', team: 2 }, // Team B picks map 4
+                            { type: 'remaining', team: null } // Last map becomes map 5
                         ]
                     };
             }
@@ -229,8 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (currentAction.type === 'ban') {
                 this.banMap(map);
-            } else if (currentAction.type === 'pick' || currentAction.type === 'decider') {
-                this.pickMap(map, currentAction.type === 'decider');
+            } else if (currentAction.type === 'pick' || currentAction.type === 'remaining') {
+                this.pickMap(map, currentAction.type === 'remaining');
             }
         }
 
@@ -258,24 +271,24 @@ document.addEventListener('DOMContentLoaded', () => {
             this.moveToNextTurn();
         }
 
-        pickMap(map, isDecider = false) {
+        pickMap(map, isRemaining = false) {
             map.classList.add('picked');
             const mapName = map.dataset.map;
             this.pickedMaps.push(mapName);
             
             this.vetoOrder.push({
-                type: isDecider ? 'decider' : 'pick',
-                team: isDecider ? null : this.currentTeam,
+                type: isRemaining ? 'remaining' : 'pick',
+                team: isRemaining ? null : this.currentTeam,
                 map: mapName
             });
 
             this.mapOrder.push({
                 map: mapName,
-                picker: isDecider ? 'Decider' : this.currentTeam
+                picker: isRemaining ? 'Remaining Map' : this.currentTeam
             });
 
             // Add to the pick list display
-            if (!isDecider) {
+            if (!isRemaining) {
                 const pickList = document.querySelector(
                     `.${this.currentTeam.toLowerCase().replace(' ', '-')}-bans .ban-list`
                 );
@@ -286,11 +299,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (this.shouldMoveToBanPhase()) {
-                this.updateTurnIndicator();
                 this.moveToNextTurn();
+                this.updateTurnIndicator();
             } else if (this.isVetoComplete()) {
                 this.switchPhase('side-selection');
                 this.showMapOrder();
+            } else {
+                this.moveToNextTurn();
+                this.updateTurnIndicator();
             }
         }
 
@@ -309,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const nextAction = this.getCurrentAction();
             if (!nextAction) return;
 
+            // Set the current team based on the next action's team
             if (nextAction.team === 1) {
                 this.currentTeam = 'Team A';
             } else if (nextAction.team === 2) {
@@ -325,12 +342,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const team = currentAction.team === 1 ? 'Team A' : 'Team B';
-            const action = currentAction.type === 'ban' ? 'ban' : 'pick';
-            
-            if (currentAction.type === 'decider') {
-                indicator.textContent = 'Decider Map';
+            if (currentAction.type === 'remaining') {
+                indicator.textContent = 'Final Map';
             } else {
+                const team = currentAction.team === 1 ? 'Team A' : 'Team B';
+                const action = currentAction.type === 'ban' ? 'ban' : 'pick';
                 indicator.textContent = `${team}'s turn to ${action}`;
             }
         }
@@ -338,7 +354,9 @@ document.addEventListener('DOMContentLoaded', () => {
         showMapOrder() {
             const mapOrderDiv = document.querySelector('.map-order');
             mapOrderDiv.innerHTML = this.mapOrder.map((item, index) => 
-                `<div class="map-order-item">Map ${index + 1}: ${item.map} (Picked by ${item.picker})</div>`
+                `<div class="map-order-item">Map ${index + 1}: ${item.map} (${
+                    item.picker === 'Remaining Map' ? 'Remaining Map' : `Picked by ${item.picker}`
+                })</div>`
             ).join('');
         }
 
@@ -368,14 +386,30 @@ document.addEventListener('DOMContentLoaded', () => {
         showSummary() {
             const summary = document.querySelector('.summary-content');
             summary.innerHTML = `
-                <h3>Match Format: Best of ${this.format === 'bo1' ? '1' : this.format === 'bo3' ? '3' : '5'}</h3>
-                ${this.mapOrder.map((item, index) => `
-                    <div class="map-summary">
-                        <p>Map ${index + 1}: ${item.map}</p>
-                        <p>Picked by: ${item.picker}</p>
-                        <p>Starting Side: ${this.sideSelections[item.map]}</p>
-                    </div>
-                `).join('')}
+                <div class="format-display">
+                    <h3>Match Format: Best of ${this.format === 'bo1' ? '1' : this.format === 'bo3' ? '3' : '5'}</h3>
+                </div>
+                <div class="maps-summary">
+                    ${this.mapOrder.map((item, index) => `
+                        <div class="map-summary-card">
+                            <div class="map-number">Map ${index + 1}</div>
+                            <div class="map-details">
+                                <div class="map-name">${item.map}</div>
+                                <div class="map-info">
+                                    <span class="picker">
+                                        ${item.picker === 'Remaining Map' ? 
+                                            '<i class="fas fa-random"></i> Remaining Map' : 
+                                            `<i class="fas fa-user-check"></i> ${item.picker}`}
+                                    </span>
+                                    <span class="side">
+                                        <i class="fas fa-shield-alt"></i> 
+                                        Starting: ${this.sideSelections[item.map]}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
             `;
             this.switchPhase('summary');
         }
@@ -407,13 +441,49 @@ document.addEventListener('DOMContentLoaded', () => {
             this.sideSelections = {};
             this.vetoOrder = [];
             
-            document.querySelectorAll('.map-card').forEach(card => {
+            // Clear all map states
+            document.querySelectorAll('.map-item').forEach(card => {
                 card.classList.remove('banned', 'picked');
             });
             
+            // Clear all side selections
             document.querySelectorAll('.side').forEach(side => {
                 side.classList.remove('selected');
             });
+
+            // Clear ban lists
+            document.querySelectorAll('.ban-list').forEach(list => {
+                list.innerHTML = '';
+            });
+
+            // Reset coin rotation
+            const coin = document.querySelector('.coin');
+            coin.style.transform = 'rotateY(0deg)';
+
+            // Clear turn indicator
+            const indicator = document.querySelector('.turn-indicator');
+            if (indicator) {
+                indicator.textContent = '';
+            }
+
+            // Clear map order display
+            const mapOrder = document.querySelector('.map-order');
+            if (mapOrder) {
+                mapOrder.innerHTML = '';
+            }
+
+            // Clear summary content
+            const summary = document.querySelector('.summary-content');
+            if (summary) {
+                summary.innerHTML = '';
+            }
+            
+            // Clear toss result
+            const tossResult = document.querySelector('.toss-result');
+            if (tossResult) {
+                tossResult.textContent = '';
+                tossResult.classList.remove('show');
+            }
             
             this.switchPhase('format-selection');
         }
