@@ -2,6 +2,7 @@
   <img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=28&duration=300&pause=100000&color=C62368&center=true&vCenter=true&random=false&width=435&lines=EZVeto+%E2%9C%A8" alt="Typing SVG" />
 </h1>
 
+![EZVeto](https://socialify.git.ci/ShiiiivanshSingh/EZVeto/image?language=1&name=1&owner=1&stargazers=1&theme=Dark)
 
 <div align="center">
 
@@ -48,15 +49,20 @@ EZVeto is a professional CS2 map veto system designed to streamline the competit
 
 <h2 align="center">Screenshots 📸</h2>
 
+
+
 <div align="center">
-  <h3>Format Selection</h3>
-  <img src="screenshot1.png" alt="Format Selection" width="600">
   
-  <h3>Map Veto Phase</h3>
-  <img src="screenshot2.png" alt="Map Veto" width="600">
+![Screenshot 2025-02-10 214616](https://github.com/user-attachments/assets/45764fb9-ec79-4907-8d15-adbdb4ba17f9)
   
-  <h3>Side Selection</h3>
-  <img src="screenshot3.png" alt="Side Selection" width="600">
+![Screenshot 2025-02-10 214620](https://github.com/user-attachments/assets/849b6e4a-1d06-436c-a0eb-b026b74fd695)
+
+![Screenshot 2025-02-10 214634](https://github.com/user-attachments/assets/68cd3ca8-534c-4e36-bc8c-1344dbe78399)
+
+![Screenshot 2025-02-10 214643](https://github.com/user-attachments/assets/35edd470-93d4-4fae-9f11-1a47f9a0471b)
+
+
+
 </div>
 
 <h2 align="center">Getting Started 🎮</h2>
