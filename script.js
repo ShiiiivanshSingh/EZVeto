@@ -255,15 +255,17 @@ document.addEventListener('DOMContentLoaded', () => {
             this.bannedMaps.push(mapName);
             
             const currentAction = this.getCurrentAction();
+            const currentTeamName = currentAction.team === 1 ? 'Team A' : 'Team B';
+            
             this.vetoOrder.push({
                 type: 'ban',
-                team: this.currentTeam,
+                team: currentTeamName,
                 map: mapName
             });
 
-            // Add to the ban list display
+            // Add to the correct team's ban list display
             const banList = document.querySelector(
-                `.${this.currentTeam.toLowerCase().replace(' ', '-')}-bans .ban-list`
+                `.${currentTeamName.toLowerCase().replace(' ', '-')}-bans .ban-list`
             );
             const banItem = document.createElement('li');
             banItem.textContent = `Banned ${mapName}`;
@@ -279,39 +281,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const mapName = map.dataset.map;
             this.pickedMaps.push(mapName);
             
+            const currentAction = this.getCurrentAction();
+            const currentTeamName = currentAction.team === 1 ? 'Team A' : 'Team B';
+            
             this.vetoOrder.push({
                 type: isRemaining ? 'remaining' : 'pick',
-                team: isRemaining ? null : this.currentTeam,
+                team: currentTeamName,
                 map: mapName
             });
 
-            this.mapOrder.push({
-                map: mapName,
-                picker: isRemaining ? 'Last Map' : this.currentTeam
-            });
-
-            // Add to the pick list display
+            // Add to the correct team's ban list display
             if (!isRemaining) {
-                const pickList = document.querySelector(
-                    `.${this.currentTeam.toLowerCase().replace(' ', '-')}-bans .ban-list`
+                const banList = document.querySelector(
+                    `.${currentTeamName.toLowerCase().replace(' ', '-')}-bans .ban-list`
                 );
                 const pickItem = document.createElement('li');
                 pickItem.textContent = `Picked ${mapName}`;
                 pickItem.classList.add('pick');
-                pickList.appendChild(pickItem);
+                banList.appendChild(pickItem);
             }
 
-            // Move to the next turn
-            if (this.shouldMoveToBanPhase()) {
-                this.moveToNextTurn();
-                this.updateTurnIndicator();
-            } else if (this.isVetoComplete()) {
-                this.switchPhase('side-selection');
-                this.showMapOrder();
-            } else {
-                this.moveToNextTurn();
-                this.updateTurnIndicator();
-            }
+            // Add to map order
+            this.mapOrder.push({
+                map: mapName,
+                picker: isRemaining ? 'Last Map' : currentTeamName
+            });
+
+            this.updateTurnIndicator();
+            this.moveToNextTurn();
             this.saveState();
         }
 
@@ -323,10 +320,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         isVetoComplete() {
             const rules = this.getVetoRules();
-            return this.vetoOrder.length === rules.sequence.length;
+            const currentStep = this.vetoOrder.length;
+            return currentStep >= rules.sequence.length;
         }
 
         moveToNextTurn() {
+            if (this.isVetoComplete()) {
+                this.switchPhase('side-selection');
+                this.showMapOrder();
+                return;
+            }
+
             const nextAction = this.getCurrentAction();
             if (!nextAction) return;
 
@@ -357,14 +361,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showMapOrder() {
+            const mapOrderDiv = document.querySelector('.map-order');
+            if (!this.mapOrder.length) return;
+
             const firstMap = this.mapOrder[0].map;
             const firstMapPicker = this.mapOrder[0].picker;
-            // The opposing team picks sides
-            const sidePickingTeam = firstMapPicker === 'Team A' ? 'Team B' : 'Team A';
             
-            const mapOrderDiv = document.querySelector('.map-order');
-            mapOrderDiv.innerHTML = 
-                `<span>${sidePickingTeam}</span> select starting side for <span>${firstMap}</span>`;
+            // For picked maps, the opposing team picks sides
+            let sidePickingTeam;
+            if (firstMapPicker === 'Last Map') {
+                sidePickingTeam = 'Team B'; // Team B picks side for decider
+            } else {
+                sidePickingTeam = firstMapPicker === 'Team A' ? 'Team B' : 'Team A';
+            }
+            
+            mapOrderDiv.innerHTML = `<span>${sidePickingTeam}</span> select starting side for <span>${firstMap}</span>`;
         }
 
         handleSideSelection(e) {
