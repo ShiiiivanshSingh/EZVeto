@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZVeto - Make vetoing great again</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <div class="hamburger-menu">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#veto">Veto</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="hero-content">
+            <h1>EZVeto</h1>
+            <p>Make vetoing great again</p>
+            <a href="#veto" class="cta-button"><span>Start Veto</span></a>
+        </div>
+    </header>
+
+    <section id="veto" class="veto-section">
+        <h2>Map Pool</h2>
+        <div class="maps-container">
+            <div class="map-card" draggable="true" data-map="ancient">
+                <img src="images/ancient.jpg" alt="Ancient">
+                <h3>Ancient</h3>
+            </div>
+            <div class="map-card" draggable="true" data-map="inferno">
+                <img src="images/inferno.jpg" alt="Inferno">
+                <h3>Inferno</h3>
+            </div>
+            <div class="map-card" draggable="true" data-map="mirage">
+                <img src="images/mirage.jpg" alt="Mirage">
+                <h3>Mirage</h3>
+            </div>
+            <div class="map-card" draggable="true" data-map="nuke">
+                <img src="images/nuke.jpg" alt="Nuke">
+                <h3>Nuke</h3>
+            </div>
+            <div class="map-card" draggable="true" data-map="overpass">
+                <img src="images/overpass.jpg" alt="Overpass">
+                <h3>Overpass</h3>
+            </div>
+            <div class="map-card" draggable="true" data-map="vertigo">
+                <img src="images/vertigo.jpg" alt="Vertigo">
+                <h3>Vertigo</h3>
+            </div>
+        </div>
+
+        <div class="veto-status">
+            <div class="team-container">
+                <h3>Team 1</h3>
+                <div class="banned-maps" id="team1-bans"></div>
+            </div>
+            <div class="team-container">
+                <h3>Team 2</h3>
+                <div class="banned-maps" id="team2-bans"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <p>EZVeto - Professional CS map veto system for competitive play. Built with modern web technologies.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul><li><a href="#home">Home</a></li><li><a href="#veto">Veto</a></li><li><a href="#about">About</a></li></ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul><li><a href="#"><i class="fab fa-twitter"></i>Twitter</a></li><li><a href="#"><i class="fab fa-github"></i>GitHub</a></li><li><a href="#"><i class="fab fa-discord"></i>Discord</a></li></ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="margin-top: 2rem;"><p>glhf.</p></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
