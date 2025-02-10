@@ -1086,4 +1086,148 @@ nav, .hero-content {
     color: var(--text-color);
     font-weight: 700;
     text-transform: uppercase;
+}
+
+/* Add these styles to your existing styles.css */
+
+.about-hero {
+    height: 60vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('peak.svg') no-repeat center bottom/cover;
+}
+
+.about-section {
+    padding: 4rem 2rem;
+    position: relative;
+    background: var(--primary-color);
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+}
+
+.about-card i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+}
+
+.about-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.about-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+.tech-stack {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('peak.svg') no-repeat center center/cover;
+}
+
+.tech-stack h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    position: relative;
+}
+
+.tech-stack h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(45deg, var(--accent-color), #fa7268);
+    border-radius: 3px;
+}
+
+.tech-icons {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tech-item i {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+}
+
+.tech-item span {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.cta-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, var(--accent-color), #fa7268);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-hero {
+        height: 50vh;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .tech-icons {
+        gap: 2rem;
+    }
+
+    .tech-item i {
+        font-size: 2.5rem;
+    }
+
+    .cta-section h2 {
+        font-size: 2rem;
+    }
 } 
