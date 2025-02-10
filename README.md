@@ -1,5 +1,5 @@
 <h1 align="center" id="title">
-  <img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=28&duration=300&pause=100000&color=C62368&center=true&vCenter=true&random=false&width=435&lines=EZVeto+%E2%9C%A8;Professional+CS2+Map+Veto+System" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=28&duration=300&pause=100000&color=C62368&center=true&vCenter=true&random=false&width=435&lines=EZVeto+%E2%9C%A8" alt="Typing SVG" />
 </h1>
 
 
