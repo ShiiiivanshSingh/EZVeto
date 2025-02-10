@@ -244,21 +244,135 @@ nav, .hero-content {
 }
 
 .side {
-    padding: 2rem;
-    border-radius: 10px;
-    background: var(--secondary-color);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
     cursor: pointer;
     transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.8rem;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.side::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.side:hover::before {
+    left: 100%;
+}
+
+.side.ct {
+    color: #5AB2FF;
+    border-color: rgba(90, 178, 255, 0.3);
+}
+
+.side.t {
+    color: #FFB156;
+    border-color: rgba(255, 177, 86, 0.3);
 }
 
 .side:hover {
     transform: translateY(-5px);
-    background: var(--accent-color);
+}
+
+.side.ct:hover {
+    background: rgba(90, 178, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(90, 178, 255, 0.2);
+}
+
+.side.t:hover {
+    background: rgba(255, 177, 86, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(255, 177, 86, 0.2);
 }
 
 .side.selected {
-    background: var(--accent-color);
     transform: scale(1.05);
+}
+
+.side.ct.selected {
+    background: rgba(90, 178, 255, 0.2);
+    border-color: rgba(90, 178, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(90, 178, 255, 0.3);
+}
+
+.side.t.selected {
+    background: rgba(255, 177, 86, 0.2);
+    border-color: rgba(255, 177, 86, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(255, 177, 86, 0.3);
+}
+
+/* Add icons to the sides */
+.side::after {
+    font-family: "Font Awesome 5 Free";
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.side.ct::after {
+    content: '\f132';  /* shield icon */
+}
+
+.side.t::after {
+    content: '\f554';  /* skull icon */
+}
+
+.side {
+    flex-direction: column;
+}
+
+/* Add animation for selection */
+@keyframes selectPulse {
+    0% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+.side.selected {
+    animation: selectPulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .sides-container {
+        gap: 2rem;
+    }
+    
+    .side {
+        width: 100px;
+        height: 100px;
+        font-size: 1.5rem;
+    }
+    
+    .side::after {
+        font-size: 2rem;
+    }
 }
 
 /* Summary */
@@ -851,9 +965,8 @@ nav, .hero-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
     flex-wrap: wrap;
-    font-size: 0.9rem;
 }
 
 .map-info span {
@@ -861,10 +974,12 @@ nav, .hero-content {
     align-items: center;
     gap: 0.5rem;
     color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
 }
 
 .map-info i {
     color: var(--accent-color);
+    font-size: 1rem;
 }
 
 @media (max-width: 480px) {
@@ -922,4 +1037,26 @@ nav, .hero-content {
     .format-display {
         max-width: 90%;
     }
+}
+
+/* Add these styles for the map order text */
+.map-order {
+    text-align: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.map-order span {
+    color: var(--text-color);
+    font-weight: 700;
+    text-transform: uppercase;
 } 
