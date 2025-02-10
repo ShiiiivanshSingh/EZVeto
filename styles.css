@@ -381,21 +381,50 @@ nav, .hero-content {
     margin: 3rem 0;
 }
 
+/* Add styles for the reset/new veto button */
 .reset-button {
-    display: block;
-    margin: 2rem auto;
-    padding: 1rem 2rem;
-    background: var(--accent-color);
-    border: none;
-    border-radius: 5px;
+    padding: 1.5rem 3rem;
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, #1a2a3a, #1a2a3c);
     color: var(--text-color);
+    border: none;
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin: 2rem auto;
+    display: block;
+}
+
+.reset-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--accent-color), #fa7268);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
 }
 
 .reset-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(198, 35, 104, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(198, 35, 104, 0.2);
+}
+
+.reset-button:hover::before {
+    opacity: 1;
+}
+
+.reset-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(198, 35, 104, 0.2);
 }
 
 /* Footer Styles */
@@ -590,21 +619,19 @@ nav, .hero-content {
 }
 
 .format-btn {
-    padding: 1.2rem 2.5rem;
-    font-size: 1.2rem;
-    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 3rem;
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, #1a2a3a, #1a2a3c);
     color: var(--text-color);
     border: none;
-    border-radius: 12px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    font-weight: 500;
-    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 600;
+    text-transform: uppercase;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .format-btn::before {
