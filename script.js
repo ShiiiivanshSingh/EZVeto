@@ -205,13 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'bo3':
                     return {
                         sequence: [
-                            { type: 'ban', team: 1 },  // Team A bans
-                            { type: 'ban', team: 2 },  // Team B bans
-                            { type: 'pick', team: 1 }, // Team A picks map 1
-                            { type: 'pick', team: 2 }, // Team B picks map 2
-                            { type: 'ban', team: 1 },  // Team A bans
-                            { type: 'ban', team: 2 },  // Team B bans
-                            { type: 'remaining', team: null } // Last map becomes map 3
+                            { type: 'ban', team: 1 },   // Team A bans first
+                            { type: 'ban', team: 2 },   // Team B bans
+                            { type: 'pick', team: 1 },  // Team A picks their map
+                            { type: 'pick', team: 2 },  // Team B picks their map
+                            { type: 'ban', team: 2 },   // Team B bans
+                            { type: 'ban', team: 1 },   // Team A bans
+                            { type: 'remaining', team: null }  // Last map is decider
                         ]
                     };
                 case 'bo5':
