@@ -3,13 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const bannedMapsContainers = document.querySelectorAll('.banned-maps');
     let currentTeam = 1;
 
-    // Smooth scroll for navigation
+    // Smooth scroll fwooooooooooooooooooo
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            
-            // Get the distance from the top of the page to the target element
             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
             
             window.scrollTo({
@@ -19,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Drag and drop functionality
+  
     mapCards.forEach(card => {
         card.addEventListener('dragstart', dragStart);
         card.addEventListener('dragend', dragEnd);
@@ -51,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mapName = e.dataTransfer.getData('text/plain');
         const mapCard = document.querySelector(`[data-map="${mapName}"]`);
         
-        if (e.target.children.length < 3) { // Limit to 3 bans per team
+        if (e.target.children.length < 3) { 
             const clone = mapCard.cloneNode(true);
             clone.classList.add('banned');
             e.target.appendChild(clone);
@@ -69,14 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Parallax effect for hero section
+
     window.addEventListener('scroll', () => {
         const hero = document.querySelector('.hero');
         const scrolled = window.pageYOffset;
         hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
     });
 
-    // Add this at the beginning of your DOMContentLoaded event listener
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
 
@@ -85,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.classList.toggle('active');
     });
 
-    // Close menu when clicking outside
+    // Close menu when clicking outside magicccc
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
             hamburger.classList.remove('active');
@@ -93,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Close menu when clicking a link
+    // Close menu when clicking a link again magicccc
     document.querySelectorAll('.menu a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -101,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    class VetoSystem {
+    class VetoSystem { //important code dont mess with it
         constructor() {
             this.maps = ['Ancient', 'Anubis', 'Inferno', 'Mirage', 'Nuke', 'Dust2', 'Train'];
             this.currentPhase = 'format-selection';
@@ -123,25 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         setupEventListeners() {
-            // Format selection
+            // Format selection b01,3,5
             document.querySelectorAll('.format-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => this.selectFormat(e.target.dataset.format));
             });
 
-            // Coin flip
+          
             document.querySelector('.flip-button').addEventListener('click', () => this.flipCoin());
 
-            // Map selection
+            // Map selectior will appear
             document.querySelectorAll('.map-item').forEach(map => {
                 map.addEventListener('click', (e) => this.handleMapClick(e));
             });
 
-            // Side selection
+            // Side selection will appear ct or t
             document.querySelectorAll('.side').forEach(side => {
                 side.addEventListener('click', (e) => this.handleSideSelection(e));
             });
 
-            // Reset button
+      
             document.querySelector('.reset-button').addEventListener('click', () => this.reset());
         }
 
@@ -155,31 +152,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const flipButton = document.querySelector('.flip-button');
             const tossResult = document.querySelector('.toss-result');
             
-            // Reset and hide result text
+          
             tossResult.textContent = '';
             tossResult.classList.remove('show');
             
-            // Disable button during animation
+        
             flipButton.disabled = true;
             
-            // Random number of full rotations (3-5) plus either 0 or 180 degrees
+           
             const rotations = (Math.floor(Math.random() * 3) + 3) * 360;
             const extraRotation = Math.random() < 0.5 ? 0 : 180;
             const totalRotation = rotations + extraRotation;
-            
-            // Add animation class
+           
             coin.style.transform = `rotateY(${totalRotation}deg)`;
             
-            // Determine winner based on final rotation
+ 
             this.currentTeam = extraRotation === 0 ? 'Team A' : 'Team B';
             
-            // Wait for coin flip animation to complete
+            // Wait for coin flip 
             setTimeout(() => {
-                // Show winner message
+                // Show  message
                 tossResult.textContent = `${this.currentTeam} wins the toss!`;
                 tossResult.classList.add('show');
                 
-                // Wait additional 3 seconds before moving to ban phase
+                //  3 seconds before  ban phase
                 setTimeout(() => {
                     flipButton.disabled = false;
                     this.switchPhase('ban-phase');
@@ -190,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         getVetoRules() {
             switch(this.format) {
-                case 'bo1':
+                case 'bo1': //important code dont mess with it i added for my own understanding turns out im super dumb lol sorry
                     return {
                         sequence: [
                             { type: 'ban', team: 1 },  // Team A bans first
@@ -204,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 case 'bo3':
                     return {
-                        sequence: [
+                        sequence: [ //important code dont mess with it i added for my own understanding turns out im super dumb lol sorry
                             { type: 'ban', team: 1 },   // Team A bans first
                             { type: 'ban', team: 2 },   // Team B bans
                             { type: 'pick', team: 1 },  // Team A picks their map
@@ -216,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                 case 'bo5':
                     return {
-                        sequence: [
+                        sequence: [ //important code for b05, bro vitality won last night no wayyy dont mess with it i added for my own understanding turns out im super dumb lol sorry
                             { type: 'ban', team: 1 },  // Team A bans
                             { type: 'ban', team: 2 },  // Team B bans
                             { type: 'pick', team: 1 }, // Team A picks map 1
@@ -263,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 map: mapName
             });
 
-            // Add to the correct team's ban list display
+            
             const banList = document.querySelector(
                 `.${currentTeamName.toLowerCase().replace(' ', '-')}-bans .ban-list`
             );
@@ -290,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 map: mapName
             });
 
-            // Add to the correct team's ban list display
+  
             if (!isRemaining) {
                 const banList = document.querySelector(
                     `.${currentTeamName.toLowerCase().replace(' ', '-')}-bans .ban-list`
@@ -334,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const nextAction = this.getCurrentAction();
             if (!nextAction) return;
 
-            // Set the current team based on the next action's team
+        
             if (nextAction.team === 1) {
                 this.currentTeam = 'Team A';
             } else if (nextAction.team === 2) {
@@ -383,23 +379,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentMapIndex = Object.keys(this.sideSelections).length;
             const currentMap = this.mapOrder[currentMapIndex].map;
             
-            // Add new selection
+            //  new selection
             document.querySelectorAll('.side').forEach(s => s.classList.remove('selected'));
             side.classList.add('selected');
-            
-            // Store the selection
+         
             this.sideSelections[currentMap] = side.classList.contains('ct') ? 'CT' : 'T';
             
             setTimeout(() => {
                 if (Object.keys(this.sideSelections).length === this.mapOrder.length) {
                     this.showSummary();
                 } else {
-                    // Show which map is next
+                    // Show which map is next weeeeeeeeeeeeeee
                     const nextMapIndex = Object.keys(this.sideSelections).length;
                     const nextMap = this.mapOrder[nextMapIndex].map;
                     const nextMapPicker = this.mapOrder[nextMapIndex].picker;
                     
-                    // Standard competitive format:
+                    // Standard competitive format: as per valve rules idk something like that
                     // - Team that didn't pick the map gets to choose sides
                     // - For the decider map, Team B chooses side
                     let sidePickingTeam;
@@ -422,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showSummary() {
             const summary = document.querySelector('.summary-content');
             
-            // Sort maps in the order they were picked
+            // Sort maps in the order they were picked  lol
             const orderedMaps = [...this.mapOrder].sort((a, b) => {
                 // Last map (decider) always goes last
                 if (a.picker === 'Last Map') return 1;
@@ -502,44 +497,43 @@ document.addEventListener('DOMContentLoaded', () => {
             this.sideSelections = {};
             this.vetoOrder = [];
             
-            // Clear all map states
+         
             document.querySelectorAll('.map-item').forEach(card => {
                 card.classList.remove('banned', 'picked');
             });
             
-            // Clear all side selections
+           s
             document.querySelectorAll('.side').forEach(side => {
                 side.classList.remove('selected');
             });
 
-            // Clear ban lists
+    
             document.querySelectorAll('.ban-list').forEach(list => {
                 list.innerHTML = '';
             });
 
-            // Reset coin rotation
+    
             const coin = document.querySelector('.coin');
             coin.style.transform = 'rotateY(0deg)';
 
-            // Clear turn indicator
             const indicator = document.querySelector('.turn-indicator');
             if (indicator) {
                 indicator.textContent = '';
             }
 
-            // Clear map order display
+      
             const mapOrder = document.querySelector('.map-order');
             if (mapOrder) {
                 mapOrder.innerHTML = '';
             }
 
-            // Clear summary content
+         
             const summary = document.querySelector('.summary-content');
             if (summary) {
                 summary.innerHTML = '';
             }
             
-            // Clear toss result
+            
             const tossResult = document.querySelector('.toss-result');
             if (tossResult) {
                 tossResult.textContent = '';
@@ -570,10 +564,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const state = JSON.parse(savedState);
             
-            // Restore all state properties
+            
             Object.assign(this, state);
 
-            // Restore UI state
+          
             if (this.currentPhase !== 'format-selection') {
                 this.switchPhase(this.currentPhase);
                 
@@ -588,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (mapElement) mapElement.classList.add('picked');
                 });
 
-                // Restore ban lists
+              
                 this.vetoOrder.forEach(veto => {
                     if (veto.team) {
                         const banList = document.querySelector(
@@ -603,20 +597,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Restore turn indicator
+           
                 this.updateTurnIndicator();
 
-                // If in side selection, restore map order display
+
                 if (this.currentPhase === 'side-selection') {
                     this.showMapOrder();
                 }
 
-                // If in summary, restore summary display
+        
                 if (this.currentPhase === 'summary') {
                     this.showSummary();
                 }
 
-                // Scroll to veto section
                 const vetoSection = document.getElementById('veto');
                 if (vetoSection) {
                     vetoSection.scrollIntoView({ behavior: 'smooth' });
@@ -625,10 +618,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize the veto system when the page loads
+  
     new VetoSystem();
 
-    // Add this to handle page load
+
     window.addEventListener('load', () => {
         const vetoSection = document.getElementById('veto');
         const savedState = sessionStorage.getItem('vetoState');
@@ -641,7 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add this at the bottom of your script, just before the closing });
+    // Add this at the bottom of your script, just before the closing }); yo thansk ai you the best :)))
     window.addEventListener('load', () => {
         // First, check if there's a saved veto state
         const savedState = sessionStorage.getItem('vetoState');
@@ -649,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedState) {
             const state = JSON.parse(savedState);
             if (state.currentPhase !== 'format-selection') {
-                // If we're in the middle of a veto, scroll to veto section
+                // If we're in the middle of a veto, scroll to veto section wop wop
                 const vetoSection = document.getElementById('veto');
                 if (vetoSection) {
                     vetoSection.scrollIntoView({ behavior: 'smooth' });
