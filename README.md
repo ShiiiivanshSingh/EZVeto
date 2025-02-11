@@ -2,7 +2,8 @@
   <img src="https://readme-typing-svg.demolab.com?font=Montserrat&weight=900&size=28&duration=300&pause=100000&color=C62368&center=true&vCenter=true&random=false&width=435&lines=EZVeto+%E2%9C%A8" alt="Typing SVG" />
 </h1>
 
-![EZVeto](https://socialify.git.ci/ShiiiivanshSingh/EZVeto/image?language=1&name=1&owner=1&stargazers=1&theme=Dark)
+![EZVeto](https://socialify.git.ci/ShiiiivanshSingh/EZVeto/image?description=1&language=1&name=1&owner=1&theme=Dark)
+
 
 <div align="center">
 
