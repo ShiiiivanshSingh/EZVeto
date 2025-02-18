@@ -395,26 +395,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (Object.keys(this.sideSelections).length === this.mapOrder.length) {
                     this.showSummary();
                 } else {
-                    // Show which map is next weeeeeeeeeeeeeee
+                    // Show which map is next
                     const nextMapIndex = Object.keys(this.sideSelections).length;
-                    const nextMap = this.mapOrder[nextMapIndex].map;
-                    const nextMapPicker = this.mapOrder[nextMapIndex].picker;
+                    // Add safe navigation here
+                    const nextMap = this.mapOrder[nextMapIndex]?.map;
+                    const nextMapPicker = this.mapOrder[nextMapIndex]?.picker;
                     
-                    // Standard competitive format: as per valve rules idk something like that
-                    // - Team that didn't pick the map gets to choose sides
-                    // - For the decider map, Team B chooses side
-                    let sidePickingTeam;
-                    if (nextMapPicker === 'Last Map') {
-                        sidePickingTeam = 'Team B'; // Team B picks side for decider
-                    } else {
-                        // The opposing team picks sides for picked maps
-                        sidePickingTeam = nextMapPicker === 'Team A' ? 'Team B' : 'Team A';
+                    // Only proceed if we have a valid next map
+                    if (nextMap && nextMapPicker) {
+                        let sidePickingTeam;
+                        if (nextMapPicker === 'Last Map') {
+                            sidePickingTeam = 'Team B'; // Team B picks side for decider
+                        } else {
+                            sidePickingTeam = nextMapPicker === 'Team A' ? 'Team B' : 'Team A';
+                        }
+                        
+                        document.querySelector('.map-order').innerHTML = 
+                            `<span>${sidePickingTeam}</span> select starting side for <span>${nextMap}</span>`;
+                        
+                        document.querySelectorAll('.side').forEach(s => s.classList.remove('selected'));
                     }
-                    
-                    document.querySelector('.map-order').innerHTML = 
-                        `<span>${sidePickingTeam}</span> select starting side for <span>${nextMap}</span>`;
-                    
-                    document.querySelectorAll('.side').forEach(s => s.classList.remove('selected'));
                 }
             }, 800);
             this.saveState();
