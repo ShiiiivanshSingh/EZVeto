@@ -376,8 +376,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         handleSideSelection(e) {
             const side = e.currentTarget;
+            
+            // Initialize mapOrder if it doesn't exist
+            if (!this.mapOrder) {
+                this.mapOrder = [];
+            }
+            
             const currentMapIndex = Object.keys(this.sideSelections).length;
-            const currentMap = this.mapOrder[currentMapIndex].map;
+            const currentMap = this.mapOrder[currentMapIndex]?.map; // Add safe navigation
             
             //  new selection
             document.querySelectorAll('.side').forEach(s => s.classList.remove('selected'));
@@ -502,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.remove('banned', 'picked');
             });
             
-           s
+          
             document.querySelectorAll('.side').forEach(side => {
                 side.classList.remove('selected');
             });
