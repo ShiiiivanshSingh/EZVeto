@@ -72,10 +72,7 @@ body {
     font-weight: 900;
     letter-spacing: -2px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #fff;
     margin-bottom: 1rem;
 }
 
