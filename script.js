@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class VetoSystem {
         constructor() {
-            this.maps = ['Ancient', 'Anubis', 'Dust2', 'Inferno', 'Mirage', 'Nuke', 'Overpass'];
+            this.maps = ['Ancient', 'Anubis', 'Dust2', 'Inferno', 'Mirage', 'Nuke', 'Train'];
             this.currentPhase = 'format-selection';
             this.format = null;
             this.coinWinner = null;
@@ -172,15 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         ]
                     };
                 case 'bo3':
-                    // Standard BO3 (ESL/FACEIT): ban ban ban ban pick pick → remaining decider
+                    // Standard BO3: ban ban pick pick ban ban → remaining decider
                     return {
                         sequence: [
                             { type: 'ban', team: 1 },
                             { type: 'ban', team: 2 },
-                            { type: 'ban', team: 1 },
-                            { type: 'ban', team: 2 },
                             { type: 'pick', team: 1 },
                             { type: 'pick', team: 2 },
+                            { type: 'ban', team: 1 },
+                            { type: 'ban', team: 2 },
                             { type: 'remaining', team: null }
                         ]
                     };
@@ -347,18 +347,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         handleSideSelection(e) {
+            if (this._sideSelecting) return;
             const side = e.currentTarget;
             const currentMapIndex = Object.keys(this.sideSelections).length;
             const currentMapEntry = this.mapOrder[currentMapIndex];
 
             if (!currentMapEntry) return;
 
+            this._sideSelecting = true;
             document.querySelectorAll('.side').forEach(s => s.classList.remove('selected'));
             side.classList.add('selected');
 
             this.sideSelections[currentMapEntry.map] = side.classList.contains('ct') ? 'CT' : 'T';
 
             setTimeout(() => {
+                this._sideSelecting = false;
                 if (Object.keys(this.sideSelections).length >= this.mapOrder.length) {
                     this.showSummary();
                 } else {
