@@ -41,11 +41,23 @@
             <div class="progress-step">Team Assignment</div>
             <div class="progress-step">Ban Phase</div>
             <div class="progress-step">Side Selection</div>
+            <div class="progress-step">Summary</div>
         </div>
 
         
         <div class="phase-container format-selection active">
             <h2>Select Match Format</h2>
+            <div class="team-names-row">
+                <div class="team-name-field">
+                    <label>Team 1 Name</label>
+                    <input class="team-name-input" data-team="a" type="text" maxlength="24" placeholder="Team A" value="Team A">
+                </div>
+                <div class="team-name-vs">vs</div>
+                <div class="team-name-field">
+                    <label>Team 2 Name</label>
+                    <input class="team-name-input" data-team="b" type="text" maxlength="24" placeholder="Team B" value="Team B">
+                </div>
+            </div>
             <div class="format-buttons">
                 <button class="format-btn" data-format="bo1">Best of 1</button>
                 <button class="format-btn" data-format="bo3">Best of 3</button>
@@ -62,6 +74,13 @@
                                             </div>
                                             <button class="flip-button">Flip Coin</button>
                                             <div class="toss-result"></div>
+                                            <div class="toss-choice">
+                                                <p class="toss-choice-prompt"></p>
+                                                <div class="toss-choice-buttons">
+                                                    <button class="toss-choice-btn" data-choice="first">Ban First</button>
+                                                    <button class="toss-choice-btn" data-choice="second">Ban Second</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -74,13 +93,13 @@
             <h2>Ban Phase</h2>
             <div class="turn-indicator"></div>
             <div class="maps-list">
-                <div class="map-item" data-map="ancient">Ancient</div>
-                <div class="map-item" data-map="anubis">Anubis</div>
-                <div class="map-item" data-map="inferno">Inferno</div>
-                <div class="map-item" data-map="mirage">Mirage</div>
-                <div class="map-item" data-map="nuke">Nuke</div>
-                <div class="map-item" data-map="dust2">Dust2</div>
-                <div class="map-item" data-map="train">Train</div>
+                <div class="map-item" data-map="Ancient">Ancient</div>
+                <div class="map-item" data-map="Anubis">Anubis</div>
+                <div class="map-item" data-map="Dust2">Dust2</div>
+                <div class="map-item" data-map="Inferno">Inferno</div>
+                <div class="map-item" data-map="Mirage">Mirage</div>
+                <div class="map-item" data-map="Nuke">Nuke</div>
+                <div class="map-item" data-map="Train">Train</div>
             </div>
             <div class="veto-status">
                 <div class="team-bans team-a-bans">
