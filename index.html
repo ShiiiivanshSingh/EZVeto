@@ -8,17 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
     <header class="hero">
         <div class="hamburger-menu">
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <div class="hamburger"><span></span><span></span><span></span></div>
             <nav class="menu">
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -29,22 +25,22 @@
         </div>
         <div class="hero-content">
             <h1>EZVeto</h1>
-            <p>Your Ultimate CS2 Map Veto Companion </p>
+            <p>Your Ultimate CS2 Map Veto Companion</p>
             <a href="#veto" class="cta-button"><span>Start Veto</span></a>
         </div>
     </header>
 
     <section id="veto" class="veto-section">
-   
+
         <div class="progress-container">
             <div class="progress-step active">Format</div>
             <div class="progress-step">Team Assignment</div>
-            <div class="progress-step">Ban Phase</div>
+            <div class="progress-step">Map Veto</div>
             <div class="progress-step">Side Selection</div>
             <div class="progress-step">Summary</div>
         </div>
 
-        
+        <!-- FORMAT SELECTION -->
         <div class="phase-container format-selection active">
             <h2>Select Match Format</h2>
             <div class="team-names-row">
@@ -65,32 +61,29 @@
             </div>
         </div>
 
-                                    <div class="phase-container team-assignment">
-                                        <h2>Team Assignment</h2>
-                                        <div class="coin-container">
-                                            <div class="coin">
-                                                <div class="side-a">Team A</div>
-                                                <div class="side-b">Team B</div>
-                                            </div>
-                                            <button class="flip-button">Flip Coin</button>
-                                            <div class="toss-result"></div>
-                                            <div class="toss-choice">
-                                                <p class="toss-choice-prompt"></p>
-                                                <div class="toss-choice-buttons">
-                                                    <button class="toss-choice-btn" data-choice="first">Ban First</button>
-                                                    <button class="toss-choice-btn" data-choice="second">Ban Second</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+        <!-- TEAM ASSIGNMENT -->
+        <div class="phase-container team-assignment">
+            <h2>Team Assignment</h2>
+            <div class="coin-container">
+                <div class="coin">
+                    <div class="side-a">Team A</div>
+                    <div class="side-b">Team B</div>
+                </div>
+                <button class="flip-button">Flip Coin</button>
+                <div class="toss-result"></div>
+                <div class="toss-choice">
+                    <p class="toss-choice-prompt"></p>
+                    <div class="toss-choice-buttons">
+                        <button class="toss-choice-btn" data-choice="first">Ban First</button>
+                        <button class="toss-choice-btn" data-choice="second">Ban Second</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-
-
-
-  
+        <!-- BAN PHASE -->
         <div class="phase-container ban-phase">
-            <h2>Ban Phase</h2>
+            <h2>Map Veto</h2>
             <div class="turn-indicator"></div>
             <div class="maps-list">
                 <div class="map-item" data-map="Ancient">Ancient</div>
@@ -99,7 +92,7 @@
                 <div class="map-item" data-map="Inferno">Inferno</div>
                 <div class="map-item" data-map="Mirage">Mirage</div>
                 <div class="map-item" data-map="Nuke">Nuke</div>
-                <div class="map-item" data-map="Train">Train</div>
+                <div class="map-item" data-map="Overpass">Overpass</div>
             </div>
             <div class="veto-status">
                 <div class="team-bans team-a-bans">
@@ -111,33 +104,77 @@
                     <ul class="ban-list"></ul>
                 </div>
             </div>
-        </div>
-
-    
-        <div class="phase-container side-selection">
-            <h2>Side Selection</h2>
-            <div class="map-order"></div>
-            <div class="sides-container">
-                <div class="side ct">CT</div>
-                <div class="side t">T</div>
+            <!-- Live log below -->
+            <div class="live-log live-log-below">
+                <div class="live-log-header">
+                    <span><i class="fas fa-stream"></i> Live Log</span>
+                    <span class="live-log-timer" id="vetoElapsed">0:00</span>
+                </div>
+                <div class="live-log-body" id="liveLogBody">
+                    <p class="live-log-empty">Actions will appear here…</p>
+                </div>
             </div>
         </div>
 
-        
+        <!-- SIDE SELECTION -->
+        <div class="phase-container side-selection">
+            <h2>Side Selection</h2>
+            <!-- prompt: who picks for which map -->
+            <div class="ss-prompt" id="ssPrompt">
+                <div class="ss-prompt-map" id="ssPromptMap"></div>
+                <div class="ss-prompt-text" id="ssPromptText"></div>
+            </div>
+            <!-- CT / T buttons -->
+            <div class="ss-buttons">
+                <button class="ss-btn ct" id="ssCT">
+                    <i class="fas fa-shield-alt"></i>
+                    <span class="ss-btn-abbr">CT</span>
+                    <span class="ss-btn-label">Counter-Terrorist</span>
+                </button>
+                <button class="ss-btn t" id="ssTSide">
+                    <i class="fas fa-crosshairs"></i>
+                    <span class="ss-btn-abbr">T</span>
+                    <span class="ss-btn-label">Terrorist</span>
+                </button>
+            </div>
+            <!-- maps done so far -->
+            <div class="ss-done" id="ssDone"></div>
+            <!-- live log below -->
+            <div class="live-log live-log-below">
+                <div class="live-log-header">
+                    <span><i class="fas fa-stream"></i> Live Log</span>
+                    <span class="live-log-timer" id="ssElapsed"></span>
+                </div>
+                <div class="live-log-body" id="ssLogBody"></div>
+            </div>
+        </div>
+
+        <!-- SUMMARY -->
         <div class="phase-container summary">
             <h2>Veto Summary</h2>
-            <div class="summary-content">
-                <!-- magically will bepopulated by JavaScript -->
+            <div class="summary-content"></div>
+            <div class="summary-actions">
+                <button class="share-btn" id="shareBtn"><i class="fas fa-copy"></i> Copy Result</button>
+                <button class="share-url-btn" id="shareUrlBtn"><i class="fas fa-link"></i> Share Link</button>
+            </div>
+            <!-- live log on summary screen -->
+            <div class="live-log live-log-below" id="summaryLog" style="margin-top:1.5rem;">
+                <div class="live-log-header">
+                    <span><i class="fas fa-stream"></i> Veto Log</span>
+                    <span class="live-log-timer" id="summaryElapsed"></span>
+                </div>
+                <div class="live-log-body" id="summaryLogBody"></div>
             </div>
             <button class="reset-button">New Veto</button>
         </div>
+
     </section>
 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>About</h4>
-                <p>EZVeto - Professional CS2 map veto system for competitive play. Built with modern web technologies.</p>
+                <p>EZVeto - Professional CS2 map veto system for competitive play.</p>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
@@ -150,17 +187,15 @@
             <div class="footer-section">
                 <h4>Contact</h4>
                 <ul>
-                    <li><a href="https://twitter.com/de_mirage_fan" target="_blank"><i class="fab fa-twitter"></i>Twitter</a></li>
-                    <li><a href="https://github.com/ShiiiivanshSingh" target="_blank"><i class="fas fa-user"></i>GitHub Profile</a></li>
-                    <li><a href="https://github.com/ShiiiivanshSingh/EZVeto" target="_blank"><i class="fab fa-github"></i>Repository</a></li>
+                    <li><a href="https://twitter.com/de_mirage_fan" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="https://github.com/ShiiiivanshSingh" target="_blank"><i class="fas fa-user"></i> GitHub Profile</a></li>
+                    <li><a href="https://github.com/ShiiiivanshSingh/EZVeto" target="_blank"><i class="fab fa-github"></i> Repository</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom" style="margin-top: 2rem;">
-            <p>glhf.</p> <!-- glhf = good luck have fun its a cs thing-->
-        </div>
+        <div class="footer-bottom" style="margin-top:2rem;"><p>glhf.</p></div>
     </footer>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
